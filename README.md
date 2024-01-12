@@ -17,7 +17,7 @@ version: "3"
 
 services:
   proxy:
-    image: ghcr.io/awahlig/tailscale-serve-proxy
+    image: ghcr.io/awahlig/tailscale-serve-proxy:latest
     # <hostname>.<tailnet>.ts.net
     hostname: myapp
     volumes:
