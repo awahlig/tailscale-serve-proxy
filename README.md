@@ -14,7 +14,7 @@ to the services using HTTPS (HTTPS must be enabled on your Tailnet).
 ## Usage
 Using `docker-compose` is recommended.
 
-```
+```yaml
 version: "3"
 
 services:
@@ -41,7 +41,7 @@ After starting, visit the link from logs to add the machine to your Tailnet.
 Since all connections to the upstream service are going through the `serve`
 functionality, the requests contain Tailscale
 [identity headers](https://tailscale.com/s/serve-headers)
-which can be used by the web service to authenticate users.
+which can be used by the web service to identify the Tailscale users.
 
 ## Limitations
 Because `tailscaled` is running inside the proxy container, the web
