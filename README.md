@@ -21,14 +21,13 @@ version: "3"
 services:
   proxy:
     image: ghcr.io/awahlig/tailscale-serve-proxy:latest
-    # `hostname` specifies what the name of the machine on the
-    # Tailnet is going to be.
-    hostname: myapp
     volumes:
       # Tailscale state must be preserved.
       - ./tailscale:/var/lib/tailscale
     environment:
-      # The web service to proxy.
+      # Name of the machine on the Tailnet.
+      - TAILSCALE_HOSTNAME=myapp
+      # URL of the web service to proxy.
       - TSPROXY_UPSTREAM=http://app
 
   # Your web service container.
@@ -45,7 +44,7 @@ which can be used to identify Tailscale users using the service.
 
 ## Limitations
 Because `tailscaled` is running inside the proxy container, the web
-service cannot use it to connect to other devices on your Tailnet.
+service cannot use it to connect to other machines on your Tailnet.
 
 ## License
 This project is using the Apache 2.0 license.
