@@ -29,8 +29,6 @@ services:
       - TAILSCALE_HOSTNAME=myapp
       # URL of the web service to proxy.
       - TSPROXY_UPSTREAM=http://app
-      # See the Tailscale Docker Mod documentation for more ways to
-      # customize
 
   # Your web service container.
   app:
