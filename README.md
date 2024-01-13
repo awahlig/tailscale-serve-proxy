@@ -9,8 +9,8 @@ termination. Note that HTTPS must be enabled on your Tailnet.
 Plain HTTP requests are redirected to HTTPS.
 
 ## Dependencies
+- [Tailscale Docker Mod](https://github.com/tailscale-dev/docker-mod)
 - [linuxserver/nginx](https://github.com/linuxserver/docker-nginx/tree/master)
-- [Tailscale Docker Mod](https://tailscale.dev/blog/docker-mod-tailscale)
 
 ## Usage
 Using `docker-compose` is recommended.
@@ -29,23 +29,30 @@ services:
       - TAILSCALE_HOSTNAME=myapp
       # URL of the web service to proxy.
       - TSPROXY_UPSTREAM=http://app
+      # See the Tailscale Docker Mod documentation for more ways to
+      # customize
 
   # Your web service container.
   app:
     image: ...
 ```
 
-After starting, visit the link from logs to add the machine to your Tailnet.
+See the
+[Tailscale Docker Mod](https://github.com/tailscale-dev/docker-mod#configuration)
+documentation for a full list of supported variables.
+
+After starting, visit the link from the container logs to add the machine
+to your Tailnet.
 
 ## Tailscale identity
 Using the `serve` functionality also means that requests sent to the backend
 conatin Tailscale [identity headers](https://tailscale.com/s/serve-headers).
-They can be used by the service to identify Tailscale users visiting the
+These can be used by the backend to identify Tailscale users visiting the
 service.
 
 ## Limitations
-Because `tailscaled` is running inside the proxy container, the web
-service cannot use it to connect to other machines on your Tailnet.
+Because tailscale is running inside the proxy container, the backend cannot
+use it to connect to other machines on the Tailnet.
 
 ## License
 This project is using the Apache 2.0 license.
