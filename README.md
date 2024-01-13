@@ -38,9 +38,10 @@ services:
 After starting, visit the link from logs to add the machine to your Tailnet.
 
 ## Tailscale identity
-The `serve` functionality also means that requests sent to the backend conatin
-Tailscale [identity headers](https://tailscale.com/s/serve-headers)
-which can be used to identify Tailscale users using the service.
+Using the `serve` functionality also means that requests sent to the backend
+conatin Tailscale [identity headers](https://tailscale.com/s/serve-headers).
+They can be used by the service to identify Tailscale users visiting the
+service.
 
 ## Limitations
 Because `tailscaled` is running inside the proxy container, the web
