@@ -4,8 +4,9 @@
 `tailscale-serve-proxy` is a Docker image that integrates dockerized web
 services into Tailscale as separate machines with their own hostnames.
 
-The proxy uses the Tailscale's `serve` functionality to provide access
-to the services using HTTPS (HTTPS must be enabled on your Tailnet).
+The proxy uses the Tailscale's `serve` functionality to provide HTTPS
+termination. Note that HTTPS must be enabled on your Tailnet.
+Plain HTTP requests are redirected to HTTPS.
 
 ## Dependencies
 - [linuxserver/nginx](https://github.com/linuxserver/docker-nginx/tree/master)
@@ -20,8 +21,8 @@ version: "3"
 services:
   proxy:
     image: ghcr.io/awahlig/tailscale-serve-proxy:latest
-    # hostname specifies what the name of the machine on the
-    # Tailnet is going to be
+    # `hostname` specifies what the name of the machine on the
+    # Tailnet is going to be.
     hostname: myapp
     volumes:
       # Tailscale state must be preserved.
@@ -38,10 +39,9 @@ services:
 After starting, visit the link from logs to add the machine to your Tailnet.
 
 ## Tailscale identity
-Since all connections to the upstream service are going through the `serve`
-functionality, the requests contain Tailscale
-[identity headers](https://tailscale.com/s/serve-headers)
-which can be used by the web service to identify the Tailscale users.
+The `serve` functionality also means that requests sent to the backend conatin
+Tailscale [identity headers](https://tailscale.com/s/serve-headers)
+which can be used to identify Tailscale users using the service.
 
 ## Limitations
 Because `tailscaled` is running inside the proxy container, the web
