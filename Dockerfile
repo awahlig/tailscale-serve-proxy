@@ -1,6 +1,6 @@
 FROM lscr.io/linuxserver/nginx:latest
 
-ENV DOCKER_MODS ghcr.io/tailscale-dev/docker-mod:main
+ENV DOCKER_MODS ghcr.io/awahlig/tailscale-docker-mod:latest
 
 ENV TAILSCALE_SERVE_MODE https
 ENV TAILSCALE_SERVE_PORT 443
