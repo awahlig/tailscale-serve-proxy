@@ -4,12 +4,16 @@
 `tailscale-serve-proxy` is a Docker image that integrates dockerized web
 services into Tailscale as separate machines with their own hostnames.
 
+Unlike the apprach of sharing the network interface between the Tailscale
+image and the service container, it provides a clean separation by
+implementing a reverse proxy server.
+
 The proxy uses the Tailscale's `serve` functionality to provide HTTPS
 termination. Note that HTTPS must be enabled on your Tailnet.
 Plain HTTP requests are redirected to HTTPS.
 
 ## Dependencies
-- [Tailscale Docker Mod](https://github.com/tailscale-dev/docker-mod)
+- [Tailscale Docker Mod](https://github.com/awahlig/tailscale-docker-mod)
 - [linuxserver/nginx](https://github.com/linuxserver/docker-nginx/tree/master)
 
 ## Usage
@@ -36,7 +40,7 @@ services:
 ```
 
 See the
-[Tailscale Docker Mod](https://github.com/tailscale-dev/docker-mod#configuration)
+[Tailscale Docker Mod](https://github.com/awahlig/tailscale-docker-mod#configuration)
 documentation for a full list of supported variables.
 
 After starting, visit the link from the container logs to add the machine
